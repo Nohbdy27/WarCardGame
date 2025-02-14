@@ -1,0 +1,174 @@
+﻿Package deck
+Begin interface makeDeck
+        Public void inizilize
+Public void shuffle
+Public void sort
+End makeDeck
+Package deck
+Begin class makeCards
+        Initialize private string rank
+        Initialize private string suit
+        Initialize private integer value
+Constructor makeCards(s, r, v) 
+Set suit = s 
+Set rank = r
+Set value = v
+End constructor makeCards
+
+
+Public int method getValue
+        Return value
+End getValue
+
+
+Public string method toString
+        Return rank + suit
+End toString
+End class makeCards
+Package deck
+Import java util
+Begin class deal implementing makeDeck
+Initialize private array list deck
+Initialize protected array list player hand
+Initialize protected array list dealer hand
+        
+Public constructor deal
+Execute inizializeDeck
+        Execute shuffleDeck
+        Execute sortCards
+End deal
+
+
+Public void method inizialize
+        Initialize string array suits with suit names
+        Initialize string array ranks with rank names
+        For each iteration of suits
+                For length of rank
+                        Add to deck array list making cards with makeCards
+                End for
+End for
+End inizialize
+Public void method shuffle
+For i equal  deck size - 1 until 0 subtract 1 from i
+        Initialize int j equal random number
+        Initialize shuffleCards equal deck at i
+                Set deck at i to deck at j
+                Set deck at j to shuffleCards
+End shuffle
+Public void method sort
+For i loops 26 times from 0
+        Add deck at i to player hand
+        Add deck at i + 26 to dealer hand
+End for
+End sort
+End class deal
+Package game
+Import java util
+Begin class war extending deal
+Inizilize protected int battle tracker
+Protected void method equal with parameter array list war pile
+        Add to battle tracker
+        Output: battle tracker
+        If battle tracker greater or equal to 3
+                Output: too many battles
+                Exit program
+        End if
+        If player hand or dealer hand is 3 or less
+                Output: not enough cards, (dealer or player) wins
+                Exit program
+        End if
+For i loops 2 times from 0
+                Remove 1 card from each hand and add it to war pile
+End for
+        Remove 1 more care from each hand and add to war pile
+        Output both cards against each other
+        Check the values of the cards
+        If player card is greater than dealer card 
+give war pile to player
+Output: you won
+End if
+        If dealer card is greater than player card
+give war pile to dealer
+Output: dealer won
+End if
+Else 
+Output: tie
+Recursive call of equal
+End else
+End equal
+End war
+Package game
+Import java util
+Import deck
+Begin class game extending war
+        Inizilize int round tracker
+        Public void method play
+                Output: Starting Game
+                While neither hand is empty
+                        Execute round
+                        If either hand is empty 
+                                Output: (dealer or player) wins
+                                Exit program
+                        End if
+                End while
+        End play
+        Private method round
+                Add to round tracker
+                If round tracker reaches 6000
+                        Output: too much rounds
+                        Exit program
+                End if
+        Take a card from each hand
+        Output the cards against eachother
+        Check the values of the cards
+        If player card is greater than dealer card 
+give both cards to player
+Output: you won
+End if
+        If dealer card is greater than player card
+give both cards to dealer
+Output: dealer won
+End if
+Else 
+        Output: war
+        Execute ifEqual wth new arraylist including the cards compared
+End else
+Output the size of both hands
+        End round
+End game
+Import java util scanner
+Begin class tutorial
+        Initizlize new scanner
+        Initizlize  int value holder
+        Public void method rules
+                Output title of rules with corresponding number
+                Do
+                        Take user input with value holder
+                        Switch with value holder
+                        Output rule corresponding with the value of value holder
+                        Exit program if user input is a corresponding value
+                        Default user input isn’t any of the options
+                                Output: try again”
+                While user input isnt exit program value
+        End rules
+End tutorial
+Import java util scanner
+Import game
+Begin class Wargame
+        Public static void main
+                Inizilize scanner
+                Create game object
+                Create tutorial object
+                Inizilize value holder
+                Do
+                        Output menu with menu options and corresponding values
+                        Take in user input
+                        Switch with user input
+                        Case 1: start game
+                        Case 2: show rules
+                        Case 3: exit program
+                        Default try again
+                While user input isnt case 3
+                Close scanner
+        End main
+End warGame
